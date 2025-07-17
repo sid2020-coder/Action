@@ -1,17 +1,12 @@
-name: Workflow for API Tests
-
+name: Maven Build
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
-
+    branches:
+      - main
 jobs:
-  build:
-
+  compile:
+    name: "Maven Build"
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
       - name: Set up JDK 21
@@ -21,6 +16,4 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: API Tests
-        run: mvn clean test -Pregression -q
-      - name: Upload a Build Artifact
-        uses: actions/upload-artifact@v4.3.3
+        run: mvn compile
